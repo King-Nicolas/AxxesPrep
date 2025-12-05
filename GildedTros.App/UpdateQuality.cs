@@ -28,6 +28,10 @@ namespace GildedTros.App
             {
                 DecreaseQuality(item, 2 * baseDecayRate);
             }
+            else
+            {
+                DecreaseQuality(item, 1 * baseDecayRate);
+            }
 
             if (item.Quality != 80)
             {
