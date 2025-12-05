@@ -8,9 +8,37 @@ namespace GildedTros.App
 {
     internal class UpdateQuality : IUpdateQuality
     {
+        protected int baseDecayRate = 1;
         public void UpdateItemQuality(Item item)
         {
-            throw new NotImplementedException();
+            item.SellIn--;
+            if (item.SellIn < 0)
+            {
+                DecreaseQuality(item, 2 * baseDecayRate);
+            }
+        }
+    }
+
+    protected static void IncreaseQuality(Item item, int amount)
+        {
+            if (item.Quality == 80)
+            {
+                return;
+            }
+
+            item.Quality += amount;
+            item.Quality = Math.Clamp(item.Quality, 0, 50);
+        }
+
+        protected static void DecreaseQuality(Item item, int amount)
+        {
+            if (item.Quality == 80)
+            {
+                return;
+            }
+
+            item.Quality -= amount;
+            item.Quality = Math.Clamp(item.Quality, 0, 50);
         }
     }
 }
