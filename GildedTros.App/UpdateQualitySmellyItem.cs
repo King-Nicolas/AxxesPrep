@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace GildedTros.App
 {
-    internal class UpdateQualitySmellyItem : IUpdateQuality
+    internal class UpdateQualitySmellyItem : UpdateQuality
     {
-        public void UpdateItemQuality(Item item)
+        private readonly String[] _smellyItemsList = new String[] { "Duplicate Code", "Long Methods", "Ugly Variable Names" };
+        public override void UpdateItemQuality(Item item)
         {
-            throw new NotImplementedException();
+            base.baseDecayRate = 2;
+            if (_smellyItemsList.Contains(item.Name))
+            {
+                base.UpdateItemQuality(item);
+            }
         }
     }
 }

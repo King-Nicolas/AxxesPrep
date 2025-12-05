@@ -9,7 +9,7 @@ namespace GildedTros.App
     internal class UpdateQuality : IUpdateQuality
     {
         protected int baseDecayRate = 1;
-        public void UpdateItemQuality(Item item)
+        public virtual void UpdateItemQuality(Item item)
         {
             if (item.Quality == 80)
             {
