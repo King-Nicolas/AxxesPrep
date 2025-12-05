@@ -11,7 +11,7 @@ namespace GildedTros.App
         protected int baseDecayRate = 1;
         public virtual void UpdateItemQuality(Item item)
         {
-            if (item.Quality == 80)
+            if (item.Name == "B-DAWG Keychain")
             {
                 return;
             }
@@ -24,19 +24,6 @@ namespace GildedTros.App
                 return;
             }
 
-            if (item.SellIn < 0)
-            {
-                DecreaseQuality(item, 2 * baseDecayRate);
-            }
-            else
-            {
-                DecreaseQuality(item, 1 * baseDecayRate);
-            }
-
-            if (item.Quality != 80)
-            {
-                item.Quality = Math.Clamp(item.Quality, 0, 50);
-            }
             if (item.Name.StartsWith("Backstage passes"))
             {
                 if (item.SellIn < 0)
@@ -51,27 +38,33 @@ namespace GildedTros.App
                 {
                     IncreaseQuality(item, 2 * baseDecayRate);
                 }
+                else
+                {
+                    IncreaseQuality(item, 1 * baseDecayRate);
+                }
+                return;
             }
+
+            if (item.SellIn < 0)
+            {
+                DecreaseQuality(item, 2 * baseDecayRate);
+            }
+            else
+            {
+                DecreaseQuality(item, 1 * baseDecayRate);
+            }
+
+            item.Quality = Math.Clamp(item.Quality, 0, 50);
         }
 
         protected static void IncreaseQuality(Item item, int amount)
         {
-            if (item.Quality == 80)
-            {
-                return;
-            }
-
             item.Quality += amount;
             item.Quality = Math.Clamp(item.Quality, 0, 50);
         }
 
         protected static void DecreaseQuality(Item item, int amount)
         {
-            if (item.Quality == 80)
-            {
-                return;
-            }
-
             item.Quality -= amount;
             item.Quality = Math.Clamp(item.Quality, 0, 50);
         }
