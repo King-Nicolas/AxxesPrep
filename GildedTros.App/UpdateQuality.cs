@@ -15,7 +15,9 @@ namespace GildedTros.App
             {
                 return;
             }
+
             item.SellIn--;
+
             if (item.Name == "Good Wine")
             {
                 IncreaseQuality(item, 1 * baseDecayRate);
@@ -25,6 +27,26 @@ namespace GildedTros.App
             if (item.SellIn < 0)
             {
                 DecreaseQuality(item, 2 * baseDecayRate);
+            }
+
+            if (item.Quality != 80)
+            {
+                item.Quality = Math.Clamp(item.Quality, 0, 50);
+            }
+            if (item.Name.StartsWith("Backstage passes"))
+            {
+                if (item.SellIn < 0)
+                {
+                    item.Quality = 0;
+                }
+                if (item.SellIn > 0 && item.SellIn <= 5)
+                {
+                    IncreaseQuality(item, 3 * baseDecayRate);
+                }
+                if (item.SellIn > 5 && item.SellIn <= 10)
+                {
+                    IncreaseQuality(item, 2 * baseDecayRate);
+                }
             }
         }
 
