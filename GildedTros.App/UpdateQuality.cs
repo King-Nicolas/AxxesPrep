@@ -11,6 +11,10 @@ namespace GildedTros.App
         protected int baseDecayRate = 1;
         public void UpdateItemQuality(Item item)
         {
+            if (item.Quality == 80)
+            {
+                return;
+            }
             item.SellIn--;
             if (item.Name == "Good Wine")
             {
