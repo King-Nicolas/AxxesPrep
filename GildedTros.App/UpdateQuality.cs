@@ -12,14 +12,19 @@ namespace GildedTros.App
         public void UpdateItemQuality(Item item)
         {
             item.SellIn--;
+            if (item.Name == "Good Wine")
+            {
+                IncreaseQuality(item, 1 * baseDecayRate);
+                return;
+            }
+
             if (item.SellIn < 0)
             {
                 DecreaseQuality(item, 2 * baseDecayRate);
             }
         }
-    }
 
-    protected static void IncreaseQuality(Item item, int amount)
+        protected static void IncreaseQuality(Item item, int amount)
         {
             if (item.Quality == 80)
             {
