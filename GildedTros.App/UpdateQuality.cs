@@ -20,7 +20,14 @@ namespace GildedTros.App
 
             if (item.Name == "Good Wine")
             {
-                IncreaseQuality(item, 1 * baseDecayRate);
+                if (item.SellIn < 0)
+                {
+                    IncreaseQuality(item, 2 * baseDecayRate);
+                }
+                else
+                {
+                    IncreaseQuality(item, 1 * baseDecayRate);
+                }
                 return;
             }
 

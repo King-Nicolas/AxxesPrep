@@ -58,6 +58,19 @@ namespace GildedTros.App
         }
 
         [Fact]
+        public void GoodWine_DoubleQualityIncrease_Expired()
+        {
+            Item item = new Item { Name = "Good Wine", SellIn = -1, Quality = 10 };
+
+            var updater = new UpdateQuality();
+
+            updater.UpdateItemQuality(item);
+
+            Assert.Equal(-2, item.SellIn);  // SellIn decreased by 1
+            Assert.Equal(12, item.Quality); // Quality increased by 2
+        }
+
+        [Fact]
         public void GoodWine_QualityStopAt50()
         {
             Item item = new Item { Name = "Good Wine", SellIn = -1, Quality = 50 };
