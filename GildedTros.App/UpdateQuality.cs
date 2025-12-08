@@ -26,7 +26,7 @@ namespace GildedTros.App
 
             if (item.Name.StartsWith("Backstage passes"))
             {
-                if (item.SellIn < 0)
+                if (item.SellIn <= 0)
                 {
                     item.Quality = 0;
                 }
@@ -38,7 +38,7 @@ namespace GildedTros.App
                 {
                     IncreaseQuality(item, 2 * baseDecayRate);
                 }
-                else
+                if (item.SellIn > 10)
                 {
                     IncreaseQuality(item, 1 * baseDecayRate);
                 }
